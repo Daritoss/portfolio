@@ -1,0 +1,324 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инфографика для ВК - Портфолио</title>    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon.svg" sizes="any" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <style>
+        :root {
+            --primary-color: #2a1810;
+            --secondary-color: #4a2c1d;
+            --accent-color: #eba8ad;
+            --text-color: #f4f1f1;
+            --light-gray: #e6e6e6;
+            --dark-gray: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, var(--primary-color) 0%, #650f1a 50%, var(--secondary-color) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(235, 168, 173, 0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo a {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-color);
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            z-index: 1001;
+        }
+
+        .burger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-color);
+            margin: 3px 0;
+            transition: 0.3s;
+            transform-origin: center;
+        }
+
+        .burger.active span:first-child {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .burger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger.active span:last-child {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .burger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: rgba(42, 24, 16, 0.98);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 80px;
+                transition: right 0.3s ease;
+                border-left: 1px solid rgba(235, 168, 173, 0.3);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-menu li {
+                width: 100%;
+            }
+
+            .nav-menu a {
+                display: block;
+                padding: 1rem 2rem;
+                border-bottom: 1px solid rgba(235, 168, 173, 0.1);
+                font-size: 1.1rem;
+            }
+        }
+
+        main {
+            margin-top: 100px;
+            padding: 2rem 0;
+        }
+
+        .project-details {
+            padding: 4rem 0;
+        }
+
+        .project-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .project-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--accent-color), #ff6b9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .project-category {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .project-description {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .project-description h2 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .project-description h3 {
+            color: var(--accent-color);
+            margin: 1.5rem 0 0.5rem 0;
+        }
+
+        .project-description ul {
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+            align-items: start;
+        }
+        
+        .project-gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            display: block;
+        }
+        
+        .project-gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        .project-navigation {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <a href="index.html">Daria Portfolio</a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html#hero">Главная</a></li>
+                <li><a href="index.html#about">Обо мне</a></li>
+                <li><a href="index.html#portfolio">Портфолио</a></li>
+                <li><a href="index.html#contact">Контакты</a></li>            </ul>
+            <button class="burger" id="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="project-details">
+            <div class="container">
+                <div class="project-header">
+                    <h1>Инфографика для ВК </h1>
+                    <p class="project-category">Инфографика</p>
+                </div>
+                
+                <div class="project-description">
+                    <h2>Описание проекта</h2>
+                    <p>Образовательная серия постов для сообщества ВКонтакте. Проект направлен на предоставление полезной информации в легкой и доступной форме с использованием узнаваемого персонажа.</p>
+                    
+                    <h3>Задачи:</h3>
+                    <ul>
+                        <li>Создание образовательного контента в формате FAQ</li>
+                        <li>Разработка понятной и привлекательной инфографики</li>
+                        <li>Адаптация сложной информации для широкой аудитории</li>
+                    </ul>
+                    
+                    <h3>Результат:</h3>
+                    <p>Серия познавательных постов, которые отвечают на популярные вопросы аудитории и способствуют повышению образовательной ценности сообщества.</p>
+                </div>
+
+                <div class="project-gallery">
+                    <img src="инфографика-посты для сообщества вк 3/стесняшка почемучка 1.png" alt="Инфографика - Почемучка 1">
+                    <img src="инфографика-посты для сообщества вк 3/стесняшка почемучка 2.png" alt="Инфографика - Почемучка 2">
+                    <img src="инфографика-посты для сообщества вк 3/стесняшка почемучка 3.png" alt="Инфографика - Почемучка 3">
+                    <img src="инфографика-посты для сообщества вк 3/стесняшка почемучка 4.png" alt="Инфографика - Почемучка 4">
+                    <img src="инфографика-посты для сообщества вк 3/стесняшка почемучка 5.png" alt="Инфографика - Почемучка 5">
+                    <img src="инфографика-посты для сообщества вк 3/стесняшка почемучка 6.png" alt="Инфографика - Почемучка 6">
+                </div>
+
+                <div class="project-navigation">
+                    <a href="index.html#portfolio" class="btn-secondary">← Назад к портфолио</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Дарья Смолина. Все права защищены.</p>
+        </div>
+    </footer>
+</body>
+</html>
+
+

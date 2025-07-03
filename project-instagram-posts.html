@@ -1,0 +1,484 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Посты для Instagram - Дарья Смолина</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon.svg" sizes="any" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    
+    <meta name="description" content="Креативные посты для социальных сетей с ярким и запоминающимся дизайном">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #43171e;
+            --secondary-color: #772428;
+            --accent-color: #eba8ad;
+            --text-color: #333;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --gray: #6c757d;
+            --dark: #212529;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--light-gray);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(235, 168, 173, 0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .back-btn {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .project-hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #650f1a 50%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 6rem 0 4rem;
+            text-align: center;
+        }
+
+        .project-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .project-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .instagram-post {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .instagram-post:hover {
+            transform: translateY(-5px);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 280px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .post-content {
+            padding: 1.5rem;
+        }
+
+        .post-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .post-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Project Info */
+        .project-info {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+
+        .info-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .info-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .info-value {
+            color: var(--gray);
+        }
+
+        /* Description Section */
+        .description-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 4rem;
+        }
+
+        .description-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .description-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            background: var(--light-gray);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .project-navigation {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 968px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .project-hero {
+                padding: 4rem 0 3rem;
+            }
+
+            .instagram-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-section,
+            .project-info,
+            .description-section,
+            .stats-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="header">
+        <nav class="nav-container">
+        <div class="container">
+            <div class="nav-container">
+                <a href="index.html" class="logo">Smolina Daria</a>
+                <a href="index.html#portfolio" class="back-btn">← Назад к портфолио</a>
+            </div>
+        </div>
+        </nav>
+    </header>
+
+    <!-- Project Hero -->
+    <section class="project-hero">
+        <div class="container">
+            <h1 class="project-title">Дизайн для Instagram</h1>
+            <p class="project-subtitle">Креативные посты для социальных сетей с ярким и запоминающимся дизайном</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="container">
+            <div class="content-grid">
+                <!-- Gallery -->
+                <div class="gallery-section">
+                    <h3 class="gallery-title">Instagram посты</h3>
+                    <div class="instagram-grid">
+                        <div class="instagram-post">
+                            <div class="post-image" style="background-image: url('Instagram post - 3.png');"></div>
+                            <div class="post-content">
+                                <h4 class="post-title">Креативный пост #1</h4>
+                                <p class="post-description">Яркий и стильный дизайн для привлечения внимания аудитории</p>
+                            </div>
+                        </div>
+                        <div class="instagram-post">
+                            <div class="post-image" style="background-image: url('Instagram post - 4.png');"></div>
+                            <div class="post-content">
+                                <h4 class="post-title">Креативный пост #2</h4>
+                                <p class="post-description">Современный подход к визуальному контенту в социальных сетях</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Info -->
+                <div class="project-info">
+                    <h3 class="info-title">Детали проекта</h3>
+                    <div class="info-item">
+                        <div class="info-label">Клиент</div>
+                        <div class="info-value">Fashion бренд</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Платформа</div>
+                        <div class="info-value">Instagram, Facebook</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Срок выполнения</div>
+                        <div class="info-value">2 недели</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Услуги</div>
+                        <div class="info-value">SMM дизайн, Контент-стратегия, Графический дизайн</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="description-section">
+                <h3 class="description-title">О проекте</h3>
+                <p class="description-text">
+                    Разработка визуального контента для социальных сетей модного бренда. Задача заключалась в создании узнаваемого стиля, который бы отражал ценности бренда и привлекал целевую аудиторию.
+                </p>
+                <p class="description-text">
+                    Каждый пост был создан с учетом особенностей платформы Instagram, трендов в SMM дизайне и поведения пользователей. Особое внимание уделялось цветовой гамме, типографике и композиции для максимального визуального воздействия.
+                </p>
+            </div>
+
+            <!-- Stats -->
+            
+
+            <!-- Navigation Buttons -->
+            <div class="project-navigation">
+                <a href="index.html#portfolio" class="btn-secondary">← Назад к портфолио</a>
+            </div>
+        </div>
+    </section>
+    <script>
+        // Mobile Navigation
+        const burger = document.getElementById('burger');
+        const navMenu = document.getElementById('nav-menu');
+
+        if (burger && navMenu) {
+            burger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navMenu.classList.toggle('active');
+                burger.classList.toggle('active');
+                
+                if (navMenu.classList.contains('active')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+            });
+
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    burger.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            document.addEventListener('click', (e) => {
+                if (navMenu.classList.contains('active') && 
+                    !burger.contains(e.target) && 
+                    !navMenu.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    burger.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+
+        // Add some animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all main sections
+        document.querySelectorAll('.gallery-section, .project-info, .description-section, .stats-section').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
+

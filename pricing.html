@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прайс-лист - Дарья Смолина</title>
+    <meta name="description" content="Прайс-лист на услуги дизайнера Дарьи Смолиной. Логотипы, баннеры, визитки, сайты и фирменный стиль.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon.svg" sizes="any" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #43171e;
+            --secondary-color: #772428;
+            --accent-color: #eba8ad;
+            --text-color: #333;
+            --white: #ffffff;
+            --light-gray: #e8e8e8;
+            --gray: #6c757d;
+            --dark: #212529;
+            --black: #000000;
+            --accent-black: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: #e8e8e8;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            position: relative;
+            width: 30px;
+            height: 30px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .burger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-color);
+            margin: 3px 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transform-origin: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem 0 5rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .page-title::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Pricing Grid */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            border: 1px solid transparent;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .pricing-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Hover effect for text color change */
+        .pricing-card:hover .pricing-title {
+            color: var(--white);
+        }
+
+        .pricing-card:hover .pricing-price {
+            color: var(--white);
+        }
+
+        .pricing-card:hover .pricing-description {
+            color: var(--white);
+        }
+
+        .pricing-card:hover .pricing-features li {
+            color: var(--white);
+        }
+
+        .pricing-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .pricing-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background: var(--primary-color);
+            border-radius: 1px;
+        }
+
+        .pricing-price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .pricing-description {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 0.5rem 0;
+            color: var(--text-color);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 3rem;
+            border-radius: 20px;
+        }
+
+        .contact-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-section p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            background: #0a0a0a;
+            color: var(--white);
+            text-align: center;
+            padding: 1.5rem 0;
+            font-size: 0.9rem;
+            box-shadow: 
+                0 -8px 20px rgba(0, 0, 0, 0.2),
+                0 -4px 10px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 10;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Footer адаптивность */
+        @media (max-width: 768px) {
+            .footer {
+                padding: 1rem 0;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer {
+                padding: 0.8rem 0;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .burger {
+                display: flex;
+                z-index: 101;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                max-width: 300px;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                z-index: 100;
+                padding: 2rem;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-menu li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-link {
+                font-size: 1.2rem;
+                font-weight: 600;
+                padding: 1rem 2rem;
+                width: 100%;
+                border-radius: 15px;
+                transition: all 0.3s ease;
+                display: block;
+                color: var(--text-color);
+                background: transparent;
+            }
+
+            .nav-link:hover,
+            .nav-link:active {
+                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                color: var(--white);
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(67, 23, 30, 0.3);
+            }
+
+            .nav-link::after {
+                display: none;
+            }
+
+            /* Анимация появления пунктов меню */
+            .nav-menu.active .nav-link {
+                animation: slideInRight 0.3s ease forwards;
+            }
+
+            .nav-menu.active li:nth-child(1) .nav-link { animation-delay: 0.1s; }
+            .nav-menu.active li:nth-child(2) .nav-link { animation-delay: 0.15s; }
+            .nav-menu.active li:nth-child(3) .nav-link { animation-delay: 0.2s; }
+            .nav-menu.active li:nth-child(4) .nav-link { animation-delay: 0.25s; }
+            .nav-menu.active li:nth-child(5) .nav-link { animation-delay: 0.3s; }
+
+            @keyframes slideInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            /* Адаптация навбара */
+            .navbar {
+                padding: 0.8rem 0;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .main-content {
+                margin-top: 80px;
+                padding: 1rem 0 3rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .pricing-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1.8rem;
+            }
+
+            .pricing-price {
+                font-size: 1.8rem;
+            }
+
+            .pricing-card {
+                padding: 1.5rem 1rem;
+            }
+        }
+
+        /* Animation on load */
+        .pricing-card {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .pricing-card:nth-child(1) { animation-delay: 0.1s; }
+        .pricing-card:nth-child(2) { animation-delay: 0.2s; }
+        .pricing-card:nth-child(3) { animation-delay: 0.3s; }
+        .pricing-card:nth-child(4) { animation-delay: 0.4s; }
+        .pricing-card:nth-child(5) { animation-delay: 0.5s; }
+        .pricing-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Smolina Daria</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Главная</a></li>
+                <li><a href="index.html#portfolio" class="nav-link">Портфолио</a></li>
+                <li><a href="pricing.html" class="nav-link active">Прайс</a></li>
+                <li><a href="index.html#about" class="nav-link">Обо мне</a></li>
+                <li><a href="index.html#contact" class="nav-link">Контакты</a></li>
+            </ul>
+            <div class="burger" id="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <h1 class="page-title">Прайс-лист</h1>
+            <p class="page-subtitle">Прозрачные цены на качественные дизайн-услуги</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3 class="pricing-title">Карточки для постов</h3>
+                    <div class="pricing-price">250₽</div>
+                    <p class="pricing-description">За 1 штуку</p>
+                    <ul class="pricing-features">
+                        <li>Уникальный дизайн</li>
+                        <li>Готовность за 1-2 дня</li>
+                        <li>2 варианта на выбор</li>
+                        <li>Файлы в PNG/JPG</li>
+                    </ul>
+                    <a href="index.html#contact" class="btn btn-primary">Заказать</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3 class="pricing-title">Дизайн логотипов</h3>
+                    <div class="pricing-price">300₽</div>
+                    <p class="pricing-description">За 1 штуку</p>
+                    <ul class="pricing-features">
+                        <li>3 варианта концепции</li>
+                        <li>Векторные файлы</li>
+                        <li>Готовность за 2-3 дня</li>
+                        <li>Бесплатные правки</li>
+                    </ul>
+                    <a href="index.html#contact" class="btn btn-primary">Заказать</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3 class="pricing-title">Уникальные баннеры</h3>
+                    <div class="pricing-price">400₽</div>
+                    <p class="pricing-description">За 1 штуку</p>
+                    <ul class="pricing-features">
+                        <li>Яркий привлекающий дизайн</li>
+                        <li>Адаптация под платформы</li>
+                        <li>Готовность за 1-2 дня</li>
+                        <li>Высокое качество печати</li>
+                    </ul>
+                    <a href="index.html#contact" class="btn btn-primary">Заказать</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3 class="pricing-title">Визитки</h3>
+                    <div class="pricing-price">500₽ / 800₽</div>
+                    <p class="pricing-description">1 сторона / 2 стороны</p>
+                    <ul class="pricing-features">
+                        <li>Элегантный дизайн</li>
+                        <li>Готовность к печати</li>
+                        <li>Стандартные размеры</li>
+                        <li>Файлы в высоком разрешении</li>
+                    </ul>
+                    <a href="index.html#contact" class="btn btn-primary">Заказать</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3 class="pricing-title">Печатные материалы</h3>
+                    <div class="pricing-price">от 1000₽</div>
+                    <p class="pricing-description">Флаеры, листовки, брошюры</p>
+                    <ul class="pricing-features">
+                        <li>Профессиональная верстка</li>
+                        <li>Индивидуальный подход</li>
+                        <li>Готовность к печати</li>
+                        <li>Консультация по материалам</li>
+                    </ul>
+                    <a href="index.html#contact" class="btn btn-primary">Заказать</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3 class="pricing-title">Фирменный стиль</h3>
+                    <div class="pricing-price">от 2000₽</div>
+                    <p class="pricing-description">Логотип, цветовая палитра, шрифты</p>
+                    <ul class="pricing-features">
+                        <li>Полный брендбук</li>
+                        <li>Логотип + фирменные цвета</li>
+                        <li>Шрифтовая пара</li>
+                        <li>Макеты применения</li>
+                    </ul>
+                    <a href="index.html#contact" class="btn btn-primary">Заказать</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3 class="pricing-title">Создание сайтов</h3>
+                    <div class="pricing-price">от 5000₽</div>
+                    <p class="pricing-description">В зависимости от сложности</p>
+                    <ul class="pricing-features">
+                        <li>Адаптивный дизайн</li>
+                        <li>Современные технологии</li>
+                        <li>SEO-оптимизация</li>
+                        <li>Техническая поддержка</li>
+                    </ul>
+                    <a href="index.html#contact" class="btn btn-primary">Заказать</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3 class="pricing-title">Поддержка сайтов</h3>
+                    <div class="pricing-price">от 1000₽</div>
+                    <p class="pricing-description">В месяц</p>
+                    <ul class="pricing-features">
+                        <li>Обновление контента</li>
+                        <li>Техническая поддержка</li>
+                        <li>Резервное копирование</li>
+                        <li>Мониторинг работы</li>
+                    </ul>
+                    <a href="index.html#contact" class="btn btn-primary">Заказать</a>
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="contact-section">
+                <h3>Готовы начать проект?</h3>
+                <p>Свяжитесь со мной для обсуждения деталей и получения персональной консультации</p>
+                <a href="index.html#contact" class="btn btn-outline">Связаться со мной</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Дарья Смолина. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const burger = document.getElementById('burger');
+        const navMenu = document.getElementById('nav-menu');
+
+        burger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navMenu.classList.toggle('active');
+            burger.classList.toggle('active');
+            
+            // Предотвращение скролла при открытом меню
+            if (navMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                burger.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Закрытие меню при клике вне его
+        document.addEventListener('click', (e) => {
+            if (navMenu.classList.contains('active') && 
+                !burger.contains(e.target) && 
+                !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                burger.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Закрытие меню при нажатии Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                burger.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Закрытие меню при изменении ориентации устройства
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                navMenu.classList.remove('active');
+                burger.classList.remove('active');
+                document.body.style.overflow = '';
+            }, 100);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href*="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href.includes('#') && !href.startsWith('#')) {
+                    // Если ссылка ведет на другую страницу с якорем, не предотвращаем переход
+                    return;
+                }
+                
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
